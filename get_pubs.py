@@ -53,13 +53,24 @@ def format_authors(authors):
     # Do the conversion
     authors = list(map(utf8totex, authors))
 
-    # Abbreviate names. This drops middle
-    # initials -- should eventually fix this.
     for i, author in enumerate(authors):
-        match = re.match('^(.*?),\s(.*?)$', author)
-        if match is not None:
-            first, last = match.groups()
-            authors[i] = '%s, %s.' % (first, last[0])
+        if 'team' in author.lower().split(' '):
+            authors[i] = author
+            continue
+        last, given = author.split(', ')
+        names = given.split(' ')
+        first = names.pop(0)
+        others = ''
+        if len(first.split('-'))>1:
+            first_names = first.split('-')
+            others += '{:.1s}.-{:.1s}. '.format(*first_names)
+        else:
+            others += '{:.1s}. '.format(first)
+        if len(names):
+            for name in names:
+                others += name[0]+'.'
+        author = '{:}, {:}'.format(last, others.rstrip())
+        authors[i] = author
 
     return authors
 
