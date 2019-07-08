@@ -68,7 +68,7 @@ def format_authors(authors):
             others += '{:.1s}. '.format(first)
         if len(names):
             for name in names:
-                others += name[0]+'.'
+                others += name[0]+'. '
         author = '{:}, {:}'.format(last, others.rstrip())
         authors[i] = author
 
