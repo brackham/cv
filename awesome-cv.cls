@@ -218,6 +218,12 @@
 \newcommand*{\joblocationstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\jobdescriptionstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
+% For elements of talk
+\newcommand*{\talktitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\talkorganizationstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\talkdatestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\talklocationstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+
 
 % For elements of entry
 \newcommand*{\entrytitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
@@ -743,6 +749,24 @@
       \joborganizationstyle{#2} & \jobdatestyle{#4} \\}
     \multicolumn{2}{L{\textwidth}}{\jobdescriptionstyle{#5}}
   \end{tabular*}%
+}
+
+% Define an environment for talk
+\newenvironment{talks}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{1.9cm} L{\textwidth - 5.5cm} R{3.5cm}}
+}{%
+    \end{tabular*}
+  \end{center}
+}
+% Define a line of cv information(honor, award or something else)
+% Usage: \talk{<title>}{<organization>}{<location>}{<date>}
+\newcommand*{\talk}[4]{%
+  \talkdatestyle{#4} & \talktitlestyle{#1}, \talkorganizationstyle{#2} & \talklocationstyle{#3} \\
 }
 
 
