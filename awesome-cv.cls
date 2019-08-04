@@ -203,6 +203,14 @@
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
+% For elements of degree
+\newcommand*{\degreetitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\degreeschoolstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\degreedatestyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\degreelocationstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\degreedescriptionstyle}[1]{{\fontsize{11pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+
+
 % For elements of job
 \newcommand*{\jobtitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\joborganizationstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\scshape\color{graytext} #1}}
@@ -691,6 +699,28 @@
   \end{itemize}
   \end{justify}
   \vspace{-4.0mm}
+}
+
+% Define an environment for degrees
+\newenvironment{degrees}{%
+  \vspace{\acvSectionContentTopSkip}
+  \begin{center}
+}{%
+  \end{center}
+}
+% Define an entry of job information
+% Usage: \degree{<title>}{<organization>}{<location>}{<date>}{<description>}
+\newcommand*{\degree}[5]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \ifempty{#2#3}
+      {\degreeschooltyle{#2} & \degreedatestyle{#4} \\}
+      {\degreetitlestyle{#1} & \degreelocationstyle{#3} \\
+      \degreeschoolstyle{#2} & \degreedatestyle{#4} \\}
+    \multicolumn{2}{L{\textwidth}}{\degreedescriptionstyle{#5}}
+  \end{tabular*}%
 }
 
 % Define an environment for jobs
